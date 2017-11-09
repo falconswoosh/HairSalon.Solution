@@ -1,0 +1,26 @@
+@using HairSalon.Models;
+@Model Client
+@{
+  Layout = "_Layout";
+}
+
+<h1>Clients for Model["stylist"].name</h1>
+<div class="stylistDetails">
+@if(Model["client"].Count == 0)
+{
+  <h3>There are no clients for Model["stylist"].name yet.</h3>
+}
+else
+{
+  foreach(var client in Model["client"])
+  {
+    <p>@client.Name</p>
+    <p><a href='/stylist/@Model["stylist"].Id/client/update/@client.Id'></a></p>
+    <p><a href='/stylist/@Model["stylist"].Id/client/delete/@client.Id'></a></p>
+  }
+}
+<br>
+<p><a href='/stylist/Model["stylist"].id/client'>Add a new client</a></p>
+<br>
+<p>><a href="/">Return to Home</a></p>
+</div>
