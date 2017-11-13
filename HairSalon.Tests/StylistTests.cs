@@ -10,7 +10,7 @@ namespace HairSalon.Tests
   {
         public StylistTests()
         {
-            DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=alan_falcon_test;";
+            DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=3306;database=alan_falcon_test;";
         }
 
        [TestMethod]

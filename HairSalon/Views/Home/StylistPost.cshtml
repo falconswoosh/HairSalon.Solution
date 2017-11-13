@@ -1,0 +1,11 @@
+@{
+  Layout = "_Layout";
+}
+<h1 id="stylists">Stylists</h1>
+<ul>
+  @foreach (var stylist in Model)
+  {
+    <li class="listOut"><a href='/stylist/@stylist.GetId()'>@stylist.GetName()</a></li>
+  }
+</ul>
+<a href="/">Back Home</a><br>

@@ -7,77 +7,98 @@ namespace HairSalon.Controllers
 {
     public class HomeController : Controller
     {
-      [HttpGet("/")] //Similar as example, with exception this returns list of stylists.
+      [HttpGet("/")]
       public ActionResult Index()
       {
         List<Stylist> stylists = Stylist.GetAll();
         return View(stylists);
       }
-      [HttpPost("/stylist")]  //Post-Categories
-      public ActionResult AddStylist()
+      [HttpPost("/stylist")]
+      public ActionResult StylistPost()
       {
         Stylist newStylist = new Stylist(Request.Form["stylistName"]);
         List<Stylist> allStylists = Stylist.GetAll();
         newStylist.Save();
-        return View("Stylist", allStylists);
+        return View("AddedStylist",newStylist);
       }
-      [HttpGet("/stylist/new")] //Get-Categories-new
+      [HttpGet("/stylist/new")]
       public ActionResult StylistForm()
       {
         return View();
       }
-      [HttpGet("/stylist/{id}")] //Get-Categories-Id. Seems to view stylists and perhaps clients
+      [HttpGet("/stylist/{id}")]
       public ActionResult StylistDetail(int id)
       {
-        Dictionary<string, object> model = new Dictionary<string, object>();
+        Dictionary<string, object> model = new Dictionary<string, object> {};
         Stylist selectedStylist = Stylist.Find(id);
         List<Client> stylistClients = selectedStylist.GetClients();
         model.Add("stylist", selectedStylist);
-        model.Add("client", stylistClients);
+        model.Add("clients", stylistClients);
         return View(model);
       }
-      [HttpGet("/stylist/{id}/client")] //MISSING from RESTful example - should diplay stylist's clients
-      public ActionResult AddClient(int id)
+      [HttpPost("/stylist/{id}/client")]
+      public ActionResult ClientPost(int id)
       {
-        Dictionary<string, object> model = new Dictionary<string, object>();
-        Stylist selectedStylist = Stylist.Find(id);
-        List<Client> stylistClients = selectedStylist.GetClients();
-        model.Add("stylist", selectedStylist);
-        model.Add("client", stylistClients);
-        return View(model);
-      }
-      [HttpPost("/stylist/{id}/client/new")] //Get-Categories-Id-Client-New.
-      public ActionResult NewClient(int id)
-      {
-        int stylistId = int.Parse(Request.Form["stylist-Id"]);
-        Client newClient = new Client(Request.Form["clientName"], stylistId);
+        Client newClient = new Client(Request.Form["name"], id);
         newClient.Save();
-        return Redirect("/stylist/" + stylistId);
+        Dictionary<string, object> model = new Dictionary<string, object> {};
+        Stylist selectedStylist = Stylist.Find(id);
+        List<Client> stylistClients = Client.GetAllStylistsClients(id);
+        model.Add("client", newClient);
+        model.Add("stylist", selectedStylist);
+        model.Add("clients", stylistClients);
+        return View("StylistDetail",model);
       }
-      [HttpGet("/stylist/{sid}/client/delete/{cid}")] //Get-Categories-sid-Client-cid
+      [HttpGet("/stylist/{id}/client/new")]
+      public ActionResult ClientForm(int id)
+      {
+        Stylist selectedStylist = Stylist.Find(id);
+        return View(selectedStylist);
+      }
+      [HttpGet("/stylist/{sid}/client/delete/{cid}")]
       public ActionResult Delete(int sid, int cid)
       {
         Client.DeleteClient(cid);
         return Redirect("/stylist/"+sid);
       }
-      [HttpGet("/stylist/{sid}/client/update/{cid}")] //MISSING from RESTful - client update
-      public ActionResult Update(int sid, int cid)
+
+      [HttpGet("/stylist/{sid}/client/update/{cid}")]
+      public ActionResult UpdateClient(int sid, int cid)
       {
-        Dictionary<string, object> model = new Dictionary<string, object>();
+        Dictionary<string, object> model = new Dictionary<string, object> {};
         Stylist selectedStylist = Stylist.Find(sid);
         Client selectedClient = Client.Find(cid);
         model.Add("stylist", selectedStylist);
         model.Add("client", selectedClient);
         return View(model);
       }
-      [HttpPost("/stylist/{sid}/client/update")] //MISSING from RESTful - client update
-      public ActionResult UpdateProccess(int id)
+      [HttpPost("/stylist/{sid}/client/update/{cid}")]
+      public ActionResult UpdateClientPost(int sid, int cid)
+      {
+        Client selectedClient = Client.Find(cid);
+        Dictionary<string, object> model = new Dictionary<string, object> {};
+        model.Add("client", selectedClient);
+        Stylist selectedStylist = Stylist.Find(sid);
+        List<Client> stylistClients = Client.GetAllStylistsClients(sid);
+        model.Add("stylist", selectedStylist);
+        model.Add("clients", stylistClients);
+        selectedClient.UpdateClient(Request.Form["name"],selectedClient.selectedStylist.sid);
+        return View("StylistDetail",model);
+      }
+      [HttpGet("/stylist/{sid}/update")]
+      public ActionResult UpdateStylist(int sid)
+      {
+        Stylist thisStylist = Stylist.Find(sid);
+        return View(thisStylist);
+      }
+
+      [HttpPost("/stylist/{sid}/update")]
+      public ActionResult UpdateProccess(int sid)
       {
         int clientId = int.Parse(Request.Form["client-id"]);
         Client updatedClient = Client.Find(clientId);
         updatedClient.UpdateClient(Request.Form["newName"]);
-        return Redirect("/stylist/"+id);
+        return Redirect("/stylist/"+sid);
       }
-
     }
 }

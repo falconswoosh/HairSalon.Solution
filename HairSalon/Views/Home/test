@@ -1,0 +1,63 @@
+<a href="/">Back Home</a><br>
+<a href="/stylist/@Model['stylist'].GetId()/client/update">Update a Client<a><br>
+<a href="/stylist/new">Add a Stylist<a><br>
+<a href="stylist/@Model['stylist'].GetId()/client/update">Update a Client<a><br>
+<a href="stylist/@Model["stylist"].GetId()/stylist/update">Update a Stylist<a><br>
+
+
+
+
+<a href="/">Back Home</a><br>
+<a href="stylist/{sid}/client/update">Update a Client<a><br>
+<a href="/stylist/new">Add a Stylist<a><br>
+<a href="stylist/{sid}/client/update">Update a Client<a><br>
+<a href="stylist/{sid}/stylist/update">Update a Stylist<a><br>
+
+
+<a href="/stylist/@Model["stylist"].GetId()">Update a Client<a><br>
+<a href="/stylist/new">Add a Stylist<a><br>
+<a href="/stylist/{sid}/client/update">Update a Client<a><br>
+<a href="/stylist/{sid}/stylist/update">Update a Stylist<a><br>
+
+/*<br>
+<p><a href='/stylist/Model["stylist"].id/client'>Add a new client</a></p>
+<br>*/
+
+
+[from StylistUpdate]:
+<form id="updateStylist" action='/stylist/@Model.GetId()' method="post">
+
+RAZOR Tricks:
+https://odetocode.com/blogs/scott/archive/2013/01/09/ten-tricks-for-razor-views.aspx
+
+[StylistDetail]:
+
+<p><a href="/stylist/@Model["stylist"].GetId()"></a>test</p>
+<p><a href="/stylist/@Model["stylist"].GetId()/client/update/@client.GetId()">Update Client</a></p>
+<p><a href="/stylist/@Model["stylist"].GetId()/client/delete/@client.GetId()">Delete Client</a></p>
+
+[ClientPost]:
+
+int stylistId = int.Parse(Request.Form["stylist-Id"]);
+Client newClient = new Client(Request.Form["clientName"], stylistId);
+
+<Controller.cs>:
+
+[HttpPost("/stylist/{id}/client")]
+public ActionResult ClientPost(int id)
+{
+int stylistId = int.Parse(Request.Form["stylist-id"]);
+Client newClient = new Client(Request.Form["client-name"], stylistId);
+newClient.Save();
+return Redirect("/stylist/" + stylistId)
+}
+
+Dictionary<string, object> model = new Dictionary<string, object>();
+Stylist selectedStylist = Stylist.Find(Int32.Parse(Request.Form["stylist-id"]));
+List<Client> stylistClients = selectedStylist.GetClients();
+string clientName = Request.Form["client-name"];
+Client newClient = new Client(clientName);
+StylistClient.Add(newClient);
+model.Add("clients", stylistClients);
+model.Add("stylist", selectedStylist);
+return View("StylistDetail",model);

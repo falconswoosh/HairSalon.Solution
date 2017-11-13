@@ -1,18 +1,19 @@
-@using HairSalon.Models;
 @{
   Layout = "_Layout";
 }
 
 <h1 id="stylists">Stylists</h1>
 <ul>
-
-  @if (@Model.Count == 0)
+<div id="index">
+  @if (Model.Count == 0)
   {
   <p> Stylist List is empty</p>
   }
   @foreach (var stylist in Model)
   {
-    <li class="stylistsOut"><a href='/stylist/@stylist.GetId()'>@stylist.GetName()</a></li>
-  }
+    <li class="stylistsOut"><a href='/stylist/@stylist.GetId()'>@stylist.GetName()&nbsp;&nbsp;&nbsp;[Details]</a><a href="/stylist/@stylist.GetId()/update">&nbsp;[Update this Stylist]</a></li>
 
+  }
 </ul>
+<a href="/">Back Home</a><br><a href="/stylist/new">Add a Stylist<a><br>
+</div>
