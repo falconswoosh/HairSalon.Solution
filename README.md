@@ -1,6 +1,11 @@
 # [MVC](https://www.tutorialspoint.com/mvc_framework/mvc_framework_introduction.htm)-HairSalon
 
 ## **`[WARNING]:`** **`Some aspects of this README.md file are only viewable when rendering this Markdown file in your editor-of-choice and may not display properly if viewed via GitHub.`**
+* An alternative method to view this README.md file in its entirety is for example, use of the [Atom](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjyvuTvvL7XAhUR8WMKHcNoA2YQFggmMAA&url=https%3A%2F%2Fatom.io%2F&usg=AOvVaw2f1xmShfpKULMHZBtecYLV) editor based on your OS:
+* Go into Atom's Preferences
+* Search for keyword "markdown"
+* Click on the top item found and specifically, the "settings" button for it
+* Select the box similar to "...view like GitHub..."
 
 #### This is code for Project#3 of the C Sharp Course
 
@@ -79,18 +84,18 @@ This website is our third project in the C# course and incorporates MVC and SQL 
 ## Specifications    
 | Implemented [X] |Item |Focus | Behavior | Input | Output | Comments |
 |:--:|:---:|---|---|---|---|---|
-|[&nbsp;&nbsp;]|1|*`Stylist`*|Be able to add a stylist. |  Susan | Susan | Selected a first name for simplicity in creating first revision.
+|[X]|1|*`Stylist`*|Be able to add a stylist. |  Susan | Susan | Selected a first name for simplicity in creating first revision.
 |[&nbsp;&nbsp;]|2| *`Client`*| **Not** be able to add a client if no stylists have been added to the system or if a stylist has not been selected. |Click `Client Name` to view all Stylists | **Active Stylists:** <br /> Susan<br />Mary<br />Henry | Chose simple list of first names to create first revision of app for look-and-feel.|
-|[&nbsp;&nbsp;]|3| *`Client`*| Be able to add a client to a specific stylist. | **Select Stylist:**<br />Susan<br />Jason<br /><br/>`If Susan AND 'Add a Client' were clicked:`<br/>Stylist: Susan<br/>• View Stylist Details<br/>• View Stylist's Clients<br/>• `Add a Client`| ** NEW Client ** <br/>Stylist: Susan<br/>`Client Name: `<br/>.<br/>.<br/>.| Selected a first name for  simplicity in creating first revision.|
-|[&nbsp;&nbsp;]|4| *`Stylist`*| Be able to see list of stylists. |Click `here` to view all Stylists | **Active Stylists:** <br /> Susan<br />Mary<br />Henry | Chose simple list of first names to create first revision of app for look-and-feel.|
-|[&nbsp;&nbsp;]|5| *`Client`*| Be able to see list of clients. |Click `here` to view all Clients | **Clients:** <br /> Margaret<br />James<br />Lisa | Chose simple list of first names to create first revision of app for look-and-feel.|
-|[&nbsp;&nbsp;]|6| *`Stylist`*| Be able to see list of clients that are associated with a stylist. |Click `here` to view all Stylists <br/> <br/>**Select Stylist:**<br />Susan<br />Jason<br /><br/>Stylist: Susan<br/>• View Stylist Details<br/>• `View Stylist's Clients`<br/>• Add a Client | **Clients:** <br /> Margaret<br />James<br />Lisa |If 'Susan' and 'View Stylist's Clients' were clicked.|
-|[&nbsp;&nbsp;]|7| *`Stylist`*| Be able to enter details of a stylist. |Name: Susan<br />Work Days: Mon-Fri<br />Hours: 12pm-8pm | Name: Susan<br />Work Days: Mon-Fri<br />Hours: 12pm-8pm  | Chose minimal list to create first revision of app for look-and-feel.|
-|[&nbsp;&nbsp;]|8| *`Client`*| Be able to enter details of a client. |Name: Margaret<br />Last cut: 2017-10-19<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little bit of bangs | Name: Margaret<br />Last cut: 2017-10-19<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little 3-inch bangs  | Chose minimal list to create first revision of app for look-and-feel. Date format is YYYY-MM-DD.|
-|[&nbsp;&nbsp;]|9| *`Client`*| Be able to update details of a client. |*`FROM`*<br />Name: Margaret<br />Last cut: 2017-10-19<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little bit of bangs <br /><br/>*`To`*<br />Name: Margaret<br />Last cut: `2017-12-15`<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little bit of bangs| Name: Margaret<br />Last cut: `2017-12-15`<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little bit of bangs  | If modifying Last Cut date.|
-|[&nbsp;&nbsp;]|10| *`Stylist`*| Be able to update details of a stylist. |*`FROM`*<br />Name: Susan<br />Work Days: `Mon-Fri`<br />Hours: 12pm-8pm <br /><br/>*`To`*<br />Name: Susan<br />Work Days: `Mon-Thu`<br />Hours: 12pm-8pm |Name: Susan<br />Work Days: `Mon-Thu`<br />Hours: 12pm-8pm | If Work Days is modified.|
-|[&nbsp;&nbsp;]|11| *`Client`*| Be able to delete a client. |Name: Margaret<br />Last cut: 2017-10-19<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little bit of bangs<br/><br/>`<Delete This Client>`| (client record deleted from database) | When "Delete This Client" is clicked. |
-|[&nbsp;&nbsp;]|12| *`Client`*| Be able to select a client and within the client view, have a field identifying which stylist they are associated with. |**Click on a client to View** Margaret<br/>Matthew| Name: Margaret<br />`Stylist: Susan`<br />Last cut: 2017-10-19<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little bit of bangs|If "Margaret" was clicked|
+|[X]|3| *`Client`*| Be able to add a client to a specific stylist. | **Select Stylist:**<br />Susan<br />Jason<br /><br/>`If Susan AND 'Add a Client' were clicked:`<br/>Stylist: Susan<br/>• View Stylist Details<br/>• View Stylist's Clients<br/>• `Add a Client`| ** NEW Client ** <br/>Stylist: Susan<br/>`Client Name: `<br/>.<br/>.<br/>.| Selected a first name for  simplicity in creating first revision.|
+|[X]|4| *`Stylist`*| Be able to see list of stylists. |Click `here` to view all Stylists | **Active Stylists:** <br /> Susan<br />Mary<br />Henry | Chose simple list of first names to create first revision of app for look-and-feel.|
+|[X]|5| *`Client`*| Be able to see list of clients. |Click `here` to view all Clients | **Clients:** <br /> Margaret<br />James<br />Lisa | Chose simple list of first names to create first revision of app for look-and-feel.|
+|[X]|6| *`Stylist`*| Be able to see list of clients that are associated with a stylist. |Click `here` to view all Stylists <br/> <br/>**Select Stylist:**<br />Susan<br />Jason<br /><br/>Stylist: Susan<br/>• View Stylist Details<br/>• `View Stylist's Clients`<br/>• Add a Client | **Clients:** <br /> Margaret<br />James<br />Lisa |If 'Susan' and 'View Stylist's Clients' were clicked.|
+|[X]|7| *`Stylist`*| Be able to enter details of a stylist. |Name: Susan<br />Work Days: Mon-Fri<br />Hours: 12pm-8pm | Name: Susan<br />Work Days: Mon-Fri<br />Hours: 12pm-8pm  | Chose minimal list to create first revision of app for look-and-feel.|
+|[X]|8| *`Client`*| Be able to enter details of a client. |Name: Margaret<br />Last cut: 2017-10-19<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little bit of bangs | Name: Margaret<br />Last cut: 2017-10-19<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little 3-inch bangs  | Chose minimal list to create first revision of app for look-and-feel. Date format is YYYY-MM-DD.|
+|[X]|9| *`Client`*| Be able to update details of a client. |*`FROM`*<br />Name: Margaret<br />Last cut: 2017-10-19<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little bit of bangs <br /><br/>*`To`*<br />Name: Margaret<br />Last cut: `2017-12-15`<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little bit of bangs| Name: Margaret<br />Last cut: `2017-12-15`<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little bit of bangs  | If modifying Last Cut date.|
+|[X]|10| *`Stylist`*| Be able to update details of a stylist. |*`FROM`*<br />Name: Susan<br />Work Days: `Mon-Fri`<br />Hours: 12pm-8pm <br /><br/>*`To`*<br />Name: Susan<br />Work Days: `Mon-Thu`<br />Hours: 12pm-8pm |Name: Susan<br />Work Days: `Mon-Thu`<br />Hours: 12pm-8pm | If Work Days is modified.|
+|[X]|11| *`Client`*| Be able to delete a client. |Name: Margaret<br />Last cut: 2017-10-19<br />Cut Style: Bob <br />Length: Short<br />Comments: Likes to have a little bit of bangs<br/><br/>`<Delete This Client>`| (client record deleted from database) | When "Delete This Client" is clicked. |
+
 
 ## Known Bugs
 
