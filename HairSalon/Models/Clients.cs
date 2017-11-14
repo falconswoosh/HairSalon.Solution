@@ -43,26 +43,14 @@ namespace HairSalon.Models
     {
         return _name;
     }
-    // public void SetName(string newName)
-    // {
-    //     _name = newName;
-    // }
     public int GetId()
     {
         return _id;
     }
-    // public void SetId(string newId)
-    // {
-    //     _id = newId;
-    // }
     public int GetStylistId()
     {
         return _stylistId;
     }
-    // public void SetStylistId()
-    // {
-    //     _stylistId = newStylistId;
-    // }
     public void Save()
     {
         MySqlConnection conn = DB.Connection();
@@ -223,14 +211,14 @@ namespace HairSalon.Models
         name.Value = updName;
         cmd.Parameters.Add(name);
 
-        MySqlParameter updStylistId= new MySqlParameter();
-        updStylistId.ParameterName = "@updateStylistId";
-        updStylistId.Value = updStylistId;
-        cmd.Parameters.Add(updStylistId);
+        MySqlParameter updateStylistId = new MySqlParameter();
+        updateStylistId.ParameterName = "@updateStylistId";
+        updateStylistId.Value = updStylistId;
+        cmd.Parameters.Add(updateStylistId);
 
         cmd.ExecuteNonQuery();
-        name = updName;
-        stylistId = updStylistId;
+        _name = updName;
+        _stylistId = updStylistId;
 
         conn.Close();
         if (conn != null)

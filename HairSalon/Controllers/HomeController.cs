@@ -19,7 +19,19 @@ namespace HairSalon.Controllers
         Stylist newStylist = new Stylist(Request.Form["stylistName"]);
         List<Stylist> allStylists = Stylist.GetAll();
         newStylist.Save();
-        return View("AddedStylist",newStylist);
+        return View("StylistDetail",newStylist);
+      }
+      [HttpGet("/stylist/clients")]
+      public ActionResult ClientsAll()
+      {
+        List<Client> allclients = Client.GetAll();
+        return View(allclients);
+      }
+      [HttpGet("/stylist/clients/delete")]
+      public ActionResult ClientsDeleteAll()
+      {
+        Client.DeleteAll();
+        return Redirect("/stylist/clients");
       }
       [HttpGet("/stylist/new")]
       public ActionResult StylistForm()
@@ -55,14 +67,14 @@ namespace HairSalon.Controllers
         Stylist selectedStylist = Stylist.Find(id);
         return View(selectedStylist);
       }
-      [HttpGet("/stylist/{sid}/client/delete/{cid}")]
+      [HttpGet("/stylist/{sid}/client/{cid}/delete")]
       public ActionResult Delete(int sid, int cid)
       {
         Client.DeleteClient(cid);
         return Redirect("/stylist/"+sid);
       }
 
-      [HttpGet("/stylist/{sid}/client/update/{cid}")]
+      [HttpGet("/stylist/{sid}/client/{cid}/update")]
       public ActionResult UpdateClient(int sid, int cid)
       {
         Dictionary<string, object> model = new Dictionary<string, object> {};
@@ -72,17 +84,18 @@ namespace HairSalon.Controllers
         model.Add("client", selectedClient);
         return View(model);
       }
-      [HttpPost("/stylist/{sid}/client/update/{cid}")]
+      [HttpPost("/stylist/{sid}/client/{cid}/update")]
       public ActionResult UpdateClientPost(int sid, int cid)
       {
         Client selectedClient = Client.Find(cid);
+        selectedClient.UpdateClient(Request.Form["name"],selectedClient.GetStylistId());
+
         Dictionary<string, object> model = new Dictionary<string, object> {};
         model.Add("client", selectedClient);
         Stylist selectedStylist = Stylist.Find(sid);
         List<Client> stylistClients = Client.GetAllStylistsClients(sid);
         model.Add("stylist", selectedStylist);
         model.Add("clients", stylistClients);
-        selectedClient.UpdateClient(Request.Form["name"],selectedClient.selectedStylist.sid);
         return View("StylistDetail",model);
       }
       [HttpGet("/stylist/{sid}/update")]
@@ -95,9 +108,8 @@ namespace HairSalon.Controllers
       [HttpPost("/stylist/{sid}/update")]
       public ActionResult UpdateProccess(int sid)
       {
-        int clientId = int.Parse(Request.Form["client-id"]);
-        Client updatedClient = Client.Find(clientId);
-        updatedClient.UpdateClient(Request.Form["newName"]);
+        Stylist updatedStylist = Stylist.Find(sid);
+        updatedStylist.UpdateStylist(Request.Form["name"], sid);
         return Redirect("/stylist/"+sid);
       }
     }

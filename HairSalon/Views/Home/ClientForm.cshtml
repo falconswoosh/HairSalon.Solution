@@ -1,7 +1,7 @@
 @{
   Layout = "_Layout";
 }
-<h1>Add A Client to Stylist ID: @Model.GetId(), @Model.GetName()</h1>
+<h1>Add A Client to Stylist: @Model.GetName()</h1>
 <form id="newClient" action='/stylist/@Model.GetId()/client' method="post">
 
   <label for="name">Enter Name</label>

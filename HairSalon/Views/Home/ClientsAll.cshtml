@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>Clients for this Hair Salon</h1>
+<div class="clientList">
+    <ul>
+@if (Model.Count == 0)
+{
+  <h3>There are no clients to list</h3>
+}
+else
+{
+  @foreach(var client in Model)
+  {
+    <li class="clientsOut">[client of Stylist Id]: @client.GetStylistId() [client Id]:  @client.GetId() [client Name]: @client.GetName()<a href='/stylist/@client.GetStylistId() /client/@client.GetId()/update'>&nbsp;&nbsp;&nbsp;[Update]</a><a href="/stylist/@client.GetStylistId()/client/@client.GetId()/delete">&nbsp;[Delete this Client]</a></li>
+  }
+}
+    </ul>
+    <a href="/">Back Home</a><br>
+    <a href="/stylist/clients/delete">Delete All Clients</a>
+</div>

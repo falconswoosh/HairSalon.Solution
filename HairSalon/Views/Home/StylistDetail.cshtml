@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-<h1>Clients for ID: @Model["stylist"].GetId(), @Model["stylist"].GetName()</h1>
+<h1>Clients for Stylist: @Model["stylist"].GetName()</h1>
 <div class="stylistDetails">
     <ul>
 @if(Model["clients"].Count == 0)
@@ -13,7 +13,7 @@ else
 {
   @foreach(var client in Model["clients"])
   {
-    <li class="stylistsOut">@client.GetName()<a href='/stylist/@Model["stylist"].GetId()/client/update/@client.GetId()'>&nbsp;&nbsp;&nbsp;[Update]</a><a href="/stylist/@Model["stylist"].GetId()/client/delete/@client.GetId()">&nbsp;[Delete this Client]</a></li>
+    <li class="stylistsOut">@client.GetName()<a href='/stylist/@Model["stylist"].GetId()/client/@client.GetId()/update'>&nbsp;&nbsp;&nbsp;[Update]</a><a href="/stylist/@Model["stylist"].GetId()/client/@client.GetId()/delete">&nbsp;[Delete this Client]</a></li>
 
   }
 }
