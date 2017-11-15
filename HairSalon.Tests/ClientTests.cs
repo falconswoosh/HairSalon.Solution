@@ -97,18 +97,20 @@ namespace HairSalon.Tests
           int stylistId1 = 1;
           int clientId1 = 1;
 
-          Client newClient1 = new Client(clientName1, stylistId1);
-          Client newClient1List = new Client(clientName1,stylistId1,clientId1);
-          listofTestClients.Add(newClient1List);
+          Client newClient1 = new Client(clientName1, stylistId1, clientId1);
+          // Client newClient1List = new Client(clientName1,stylistId1,clientId1);
+          // listofTestClients.Add(newClient1List);
+          listofTestClients.Add(newClient1);
           newClient1.Save();
 
           string clientName2 = "Wendy";
           int stylistId2 = 1;
           int clientId2 = 2;
 
-          Client newClient2 = new Client(clientName2, stylistId2);
-          Client newClient2List = new Client(clientName2,stylistId2,clientId2);
-          listofTestClients.Add(newClient2List);
+          Client newClient2 = new Client(clientName2, stylistId2, clientId2);
+          // Client newClient2List = new Client(clientName2,stylistId2,clientId2);
+          // listofTestClients.Add(newClient2List);
+          listofTestClients.Add(newClient2);
           newClient2.Save();
 
           //Act
