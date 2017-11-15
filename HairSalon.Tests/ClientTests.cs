@@ -84,39 +84,41 @@ namespace HairSalon.Tests
           //Assert
           Assert.AreEqual(testClient, foundClient);
         }
-        // [TestMethod]
-        // public void GetAllStylistsClients_FindsAStylistsClients_Id()
-        // {
-        //   //Arrange
-        //   Stylist testStylist = new Stylist("Mary");
-        //   testStylist.Save();
-        //
-        //   List<Client> listofTestClients = new List<Client> ();
-        //
-        //   string clientName1 = "Barry";
-        //   int stylistId1 = 1;
-        //
-        //   Client newClient1 = new Client(clientName1, stylistId1);
-        //   Client newClient1List = new Client(stylistId1,clientName1, stylistId1);
-        //   listofTestClients.Add(newClient1List);
-        //   newClient1.Save();
-        //
-        //   string clientName2 = "Wendy";
-        //   int stylistId2 = 1;
-        //
-        //   Client newClient2 = new Client(clientName2, stylistId2);
-        //   Client newClient2List = new Client(stylistId1,clientName2, stylistId2);
-        //   listofTestClients.Add(newClient2List);
-        //   newClient2.Save();
-        //
-        //   //Act
-        //   int testSid = testStylist.GetId();
-        //
-        //   List<Client> stylistsClients = Client.GetAllStylistsClients(testSid);
-        //
-        //   //Assert
-        //   CollectionAssert.AreEqual(stylistsClients,listofTestClients);
-        // }
+        [TestMethod]
+        public void GetAllStylistsClients_FindsAStylistsClients_Id()
+        {
+          //Arrange
+          Stylist testStylist = new Stylist("Mary");
+          testStylist.Save();
+
+          List<Client> listofTestClients = new List<Client> ();
+
+          string clientName1 = "Barry";
+          int stylistId1 = 1;
+          int clientId1 = 1;
+
+          Client newClient1 = new Client(clientName1, stylistId1);
+          Client newClient1List = new Client(clientName1,stylistId1,clientId1);
+          listofTestClients.Add(newClient1List);
+          newClient1.Save();
+
+          string clientName2 = "Wendy";
+          int stylistId2 = 1;
+          int clientId2 = 2;
+
+          Client newClient2 = new Client(clientName2, stylistId2);
+          Client newClient2List = new Client(clientName2,stylistId2,clientId2);
+          listofTestClients.Add(newClient2List);
+          newClient2.Save();
+
+          //Act
+          int testSid = testStylist.GetId();
+
+          List<Client> stylistsClients = Client.GetAllStylistsClients(testSid);
+
+          //Assert
+          CollectionAssert.AreEqual(stylistsClients,listofTestClients);
+        }
         [TestMethod]
         public void UpdateClient_UpdateAClient_0()
         {
