@@ -12,80 +12,93 @@ namespace HairSalon.Tests
         {
             DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=alan_falcon_test;";
         }
-
-       [TestMethod]
-       public void GetAll_StylistsEmptyAtFirst_0()
-       {
+        public void Dispose()
+        {
+          Client.DeleteAll();
+          Stylist.DeleteAll();
+        }
+        [TestMethod]
+        public void GetAll_StylistsEmptyAtFirst_0()
+        {
          //Arrange, Act
          int result = Stylist.GetAll().Count;
 
          //Assert
          Assert.AreEqual(0, result);
-       }
+        }
 
-      [TestMethod]
-      public void Equals_ReturnsTrueForSameName_Stylist()
-      {
-        //Arrange, Act
-        Stylist firstStylist = new Stylist("Barry");
-        Stylist secondStylist = new Stylist("Wendy");
+        [TestMethod]
+        public void Equals_ReturnsTrueForSameName_Stylist()
+        {
+          //Arrange, Act
+          Stylist firstStylist = new Stylist("Barry");
+          Stylist secondStylist = new Stylist("Barry");
 
-        //Assert
-        Assert.AreEqual(firstStylist, secondStylist);
-      }
+          //Assert
+          Assert.AreEqual(firstStylist.GetName(), secondStylist.GetName());
+        }
 
-      [TestMethod]
-      public void Save_SavesStylistToDatabase_StylistList()
-      {
-        //Arrange
-        Stylist testStylist = new Stylist("Wendy");
-        testStylist.Save();
+        [TestMethod]
+        public void Save_SavesStylistToDatabase_StylistList()
+        {
+          //Arrange
+          Stylist testStylist = new Stylist("Wendy",1);
+          testStylist.Save();
 
-        //Act
-        List<Stylist> result = Stylist.GetAll();
-        List<Stylist> testList = new List<Stylist>{testStylist};
+          //Act
+          List<Stylist> result = Stylist.GetAll();
+          List<Stylist> testList = new List<Stylist>{testStylist};
 
-        //Assert
-        CollectionAssert.AreEqual(testList, result);
-      }
+          //Assert
+          CollectionAssert.AreEqual(testList, result);
+        }
+
+        [TestMethod]
+        public void Save_DatabaseAssignsIdToStylist_Id()
+        {
+         //Arrange
+         Stylist testStylist = new Stylist("Barry",1);
+         testStylist.Save();
+
+         //Act
+         Stylist savedStylist = Stylist.GetAll()[0];
+
+         int result = savedStylist.GetId();
+         int testId = testStylist.GetId();
+
+         //Assert
+         Assert.AreEqual(testId, result);
+        }
 
 
-     [TestMethod]
-     public void Save_DatabaseAssignsIdToStylist_Id()
-     {
-       //Arrange
-       Stylist testStylist = new Stylist("Barry");
-       testStylist.Save();
+        [TestMethod]
+        public void Find_FindsStylistInDatabase_Stylist()
+        {
+          //Arrange
+          Stylist testStylist = new Stylist("Wendy",1);
+          testStylist.Save();
 
-       //Act
-       Stylist savedStylist = Stylist.GetAll()[0];
+          //Act
+          Stylist foundStylist = Stylist.Find(testStylist.GetId());
 
-       int result = savedStylist.GetId();
-       int testId = testStylist.GetId();
+          //Assert
+          Assert.AreEqual(testStylist, foundStylist);
+        }
+        [TestMethod]
+        public void UpdateStylist_UpdateAStylist__0()
+        {
+          //Arrange
+          string addStylist = "Mary";
+          Stylist testStylist = new Stylist(addStylist,1);
+          testStylist.Save();
 
-       //Assert
-       Assert.AreEqual(testId, result);
-    }
+          //Act
+          string savedStylistName = testStylist.GetName();
+          string localStylistName = addStylist;
 
 
-    [TestMethod]
-    public void Find_FindsStylistInDatabase_Stylist()
-    {
-      //Arrange
-      Stylist testStylist = new Stylist("Wendy");
-      testStylist.Save();
-
-      //Act
-      Stylist foundStylist = Stylist.Find(testStylist.GetId());
-
-      //Assert
-      Assert.AreEqual(testStylist, foundStylist);
-    }
-
-    public void Dispose()
-    {
-      Task.DeleteAll();
-      Stylist.DeleteAll();
-    }
+          //Assert
+          Assert.AreEqual(localStylistName,savedStylistName);
+        }
   }
 }

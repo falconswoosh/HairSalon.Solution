@@ -23,7 +23,11 @@ namespace HairSalon.Models
             else
             {
                 Stylist newStylist = (Stylist) otherStylist;
-                return this.GetId().Equals(newStylist.GetId());
+                bool idEquality = this.GetId() == newStylist.GetId();
+                bool nameEquality = (this.GetName() == newStylist.GetName());
+                return (idEquality && nameEquality);
+                // return this.GetId().Equals(newStylist.GetId());
+
             }
         }
         public override int GetHashCode()
@@ -116,7 +120,7 @@ namespace HairSalon.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM stylist;";
+            cmd.CommandText = @"DELETE FROM stylists;";
             cmd.ExecuteNonQuery();
             conn.Close();
             if (conn != null)

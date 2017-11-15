@@ -106,7 +106,7 @@ namespace HairSalon.Controllers
       }
 
       [HttpPost("/stylist/{sid}/update")]
-      public ActionResult UpdateProccess(int sid)
+      public ActionResult UpdateStylistPost(int sid)
       {
         Stylist updatedStylist = Stylist.Find(sid);
         updatedStylist.UpdateStylist(Request.Form["name"], sid);
